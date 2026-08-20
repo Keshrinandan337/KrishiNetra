@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History | KrishiNetra</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>  
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-title">
+            <span class="leaf">🌿</span>
+            <span>KrishiNetra</span>
+        </div>
+
+        <small>AI-Powered Agriculture Assistant</small>
+
+    </div>
+
+
+    <!-- Profile -->
+<div class="right-section">
+
+    <a href="{{ url_for('home') }}" class="home-btn">
+        🏠 Home
+    </a>
+
+    <div class="profile">
+
+        <button class="profile-btn">
+
+            <div class="avatar">
+                {{ username[0]|upper }}
+            </div>
+
+            <span>{{ username }}</span>
+
+            <span class="arrow">&#9662;</span>
+
+        </button>
+
+        <div class="profile-menu">
+
+            <h3>{{ username }}</h3>
+
+            <p>📍 {{ state }}</p>
+
+            {% if district %}
+            <p>🏙 {{ district }}</p>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+
+</nav>
+
+    
+<div class="container">
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <div class="title-section">
+
+        <h1>🌿 Prediction History</h1>
+
+        <p>
+            View all your previous plant disease predictions,
+            confidence scores and analysis history.
+        </p>
+
+    </div>
+
+    <div class="header-buttons">
+
+    <a href="{{ url_for('print_history') }}" target="_blank" class="download-btn">
+        📄 Download PDF
+    </a>
+
+    </div>
+
+</div>
+
+<!-- ================= WELCOME ================= -->
+
+<div class="welcome-box">
+
+    <h2>👋 Welcome Back, {{ username }}</h2>
+
+    <p>
+        Here is your complete prediction history.
+    </p>
+
+</div>
+
+<!-- ================= SUMMARY ================= -->
+
+<div class="summary-grid">
+
+    <div class="summary-card">
+
+        <h3>Total Predictions</h3>
+
+        <span>{{ total_predictions }}</span>
+
+    </div>
+
+    <div class="summary-card">
+
+        <h3>Healthy</h3>
+
+        <span>{{ healthy_count }}</span>
+
+    </div>
+
+    <div class="summary-card">
+
+        <h3>Diseased</h3>
+
+        <span>{{ diseased_count }}</span>
+
+    </div>
+
+    <div class="summary-card">
+
+        <h3>Average Confidence</h3>
+
+        <span>{{ average_confidence }}%</span>
+
+    </div>
+
+</div>
+
+<!-- ================= SEARCH ================= -->
+
+<div class="toolbar">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Search disease..."
+        class="search-box">
+
+        <div class="filters">
+
+            <a href="{{ url_for('history', filter='all') }}"
+            class="{% if filter_type == 'all' %}active-filter{% endif %}">
+                All
+            </a>
+
+            <a href="{{ url_for('history', filter='week') }}"
+            class="{% if filter_type == 'week' %}active-filter{% endif %}">
+                Last Week
+            </a>
+
+            <a href="{{ url_for('history', filter='month') }}"
+            class="{% if filter_type == 'month' %}active-filter{% endif %}">
+                Last Month
+            </a>
+
+        </div>
+
+</div>
+
+<!-- ================= TABLE ================= -->
+
+<table class="history-table">
+
+    <thead>
+
+        <tr>
+
+            <th>Plant Image</th>
+            <th>Disease</th>
+            <th>Confidence</th>
+            <th>State</th>
+            <th>Date & Time</th>
+            <th>Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% if history %}
+
+        {% for row in history %}
+
+        <tr class="history-row">
+
+            <td>
+                <img src="{{ url_for('uploaded_file', filename=row[1]) }}" class="plant-img">
+            </td>
+
+            <td class="disease-name">
+                {{ row[2] }}
+            </td>
+
+            <td>{{ "%.2f"|format(row[3]) }}%</td>
+
+            <td>{{ row[4] }}</td>
+
+            <td>{{ row[5] }}</td>
+
+            <td>
+                <a href="{{ url_for('delete_history', id=row[0]) }}"
+                class="delete-btn"
+                onclick="return confirm('Delete this prediction?');">
+                    ✕
+                </a>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <tr>
+
+            <td colspan="6" class="no-history">
+
+                <div class="empty-box">
+
+                    <h2>📂 No Predictions Found</h2>
+
+                    {% if filter_type == "week" %}
+
+                        <p>No prediction records are available for the last 7 days.</p>
+
+                    {% elif filter_type == "month" %}
+
+                        <p>No prediction records are available for the last 30 days.</p>
+
+                    {% else %}
+
+                        <p>You haven't made any predictions yet.</p>
+
+                    {% endif %}
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    {% endif %}
+
+    </tbody>
+
+</table>
+<div id="searchMessage" class="search-message">
+
+    <h2>🔍 No Matching Disease Found</h2>
+
+    <p>Try searching using another disease name.</p>
+
+</div>
+
+
+<script>
+
+const profileBtn = document.querySelector(".profile-btn");
+const profileMenu = document.querySelector(".profile-menu");
+
+profileBtn.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+    profileMenu.classList.toggle("show");
+
+});
+
+document.addEventListener("click", function(){
+
+    profileMenu.classList.remove("show");
+
+});
+
+</script>
+
+<!-- ================= SEARCH FUNCTIONALITY ================= -->
+<script>
+
+const searchInput = document.getElementById("searchInput");
+
+const rows = document.querySelectorAll(".history-row");
+
+const searchMessage = document.getElementById("searchMessage");
+
+searchInput.addEventListener("keyup", function(){
+
+    const value = searchInput.value.toLowerCase();
+
+    let found = false;
+
+    rows.forEach(function(row){
+
+        const rowText = row.textContent.toLowerCase();
+
+        if(rowText.includes(value)){
+
+            row.style.display = "";
+
+            found = true;
+
+        }
+
+        else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+    if(found){
+
+        searchMessage.style.display = "none";
+
+    }
+
+    else{
+
+        searchMessage.style.display = "block";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

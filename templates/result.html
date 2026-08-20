@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result - KrishiNetra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+</head>
+
+<body>
+
+<!-- ✅ NEW NAVBAR -->
+<div class="navbar">
+
+    <!-- Left -->
+    <div class="nav-left">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+
+        <div class="brand">
+            <h2>KrishiNetra</h2>
+            <p>AI-Powered Agriculture Assistant / Advisor</p>
+        </div>
+    </div>
+
+    <!-- Right -->
+    <div class="nav-right">
+        <a href="/home" class="btn-outline">🏠 Home</a>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <!-- SUCCESS -->
+<div class="success">
+    <div class="success-content">
+
+        <div class="success-icon">✔</div>
+
+        <div class="success-text">
+            <h2>Analysis Completed Successfully!</h2>
+            <p>Your plant leaf has been analyzed using advanced AI technology. Here are the detailed results:</p>
+        </div>
+
+    </div>
+</div>
+
+    <!-- TOP SECTION -->
+    <div class="top">
+
+        <!-- IMAGE -->
+        <div class="card">
+            <h3>📷 Uploaded Leaf Image</h3>
+            {% if image_path %}
+                <img src="{{ image_path }}">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+        </div>
+
+        <!-- ✅ UPDATED RESULT CARD -->
+        <div class="card result-card">
+
+            <p class="label">⚠️ Prediction Result</p>
+
+            <!-- 🔥 Highlight Box -->
+            <div class="prediction-box">
+
+                <!-- Shield Icon -->
+                <div class="icon">
+                    <span>
+                        {% if disease == "Healthy" %}
+                            ✓
+                        {% else %}
+                            ✖
+                        {% endif %}
+                    </span>
+                </div>
+
+                <!-- Text -->
+                <div class="prediction-text">
+
+                    <p class="sub-label">
+                        {% if disease == "Healthy" %}
+                            Plant is Healthy
+                        {% else %}
+                            Disease Detected
+                        {% endif %}
+                    </p>
+
+                    <h2 class="disease-name {{ 'healthy' if disease == 'Healthy' else 'diseased' }}">
+                        {{ disease }}
+                    </h2>
+
+                    <span class="confidence-badge">
+                        Confidence: {{ "%.2f"|format(confidence) }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- Status -->
+            <p class="status">
+                Status:
+
+                <span class="status-badge 
+                    {% if severity == 'Healthy' %}
+                        status-green
+                    {% elif severity == 'Moderate' %}
+                        status-yellow
+                    {% else %}
+                        status-red
+                    {% endif %}
+                ">
+                    <span class="dot"></span>
+                    {{ severity }}
+                </span>
+            </p>
+
+            <!-- Confidence -->
+            <p class="confidence-label">Confidence Score</p>
+
+            <div class="progress-container">
+    
+                <div class="progress">
+                    <div class="progress-bar" style="width: {{ confidence }}%;"></div>
+                </div>
+
+                <span class="progress-text">{{ "%.2f"|format(confidence) }}%</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- INFO GRID -->
+    <div class="grid">
+
+        <div class="card">
+            <h3>📖 Description</h3>
+            <p>{{ info.description }}</p>
+        </div>
+
+        <div class="card">
+            <h3>⚠️ Causes</h3>
+            <ul>
+                {% for c in info.causes %}
+                <li>{{ c }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card red">
+            <h3>💊 Treatment</h3>
+            <ul>
+                {% for t in info.treatment %}
+                <li>{{ t }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card green">
+            <h3>🛡 Prevention Tips</h3>
+            <ul>
+                {% for p in info.prevention %}
+                <li>{{ p }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+    
+</div>
+<footer>
+🌱 KrishiNetra – AI Powered Agriculture Assistant  
+</footer>
+
+</body>
+</html>

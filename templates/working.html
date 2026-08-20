@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Working - KrishiNetra</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/working.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+
+        <div class="logo-text">
+            <h2>KrishiNetra</h2>
+            <p>AI-Powered Agriculture Assistant / Advisor</p>
+        </div>
+    </div>
+
+
+<div class="nav-links" id="navLinks">
+<a href="/home">🏠 Home</a>
+<a href="/about">About</a>
+<a class="active" href="/working">Working</a>
+<a href="/contact">Contact</a>
+</div>
+
+<!-- Hamburger (mobile only) -->
+<button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+</button>
+
+</nav>
+
+<div class="container">
+
+<div class="title">
+<h1><i class="fas fa-gear"></i> How KrishiNetra Works</h1>
+<p>AI-Powered Agriculture Assistant Workflow</p>
+</div>
+
+<div class="workflow">
+
+<div class="step">
+<i class="fas fa-upload"></i>
+<h3>Upload Image</h3>
+<p>Farmer uploads crop image.</p>
+</div>
+
+<div class="step">
+<i class="fas fa-image"></i>
+<h3>Preprocessing</h3>
+<p>Image resizing and normalization.</p>
+</div>
+
+<div class="step">
+<i class="fas fa-brain"></i>
+<h3>MobileNetV2</h3>
+<p>Deep Learning prediction engine.</p>
+</div>
+
+<div class="step">
+<i class="fas fa-chart-line"></i>
+<h3>Prediction</h3>
+<p>Disease classification result.</p>
+</div>
+
+<div class="step">
+<i class="fas fa-book"></i>
+<h3>Disease Library</h3>
+<p>Detailed disease information.</p>
+</div>
+
+</div>
+
+<div class="features">
+
+<div class="feature-card">
+<i class="fas fa-cloud-sun-rain"></i>
+<h2>Weather Advisory</h2>
+
+<ul>
+<li>Real-time weather updates</li>
+<li>Rainfall prediction</li>
+<li>Temperature monitoring</li>
+<li>Smart farming guidance</li>
+</ul>
+
+</div>
+
+<div class="feature-card">
+<i class="fas fa-robot"></i>
+<h2>Agriculture Chatbot</h2>
+
+<ul>
+<li>Ask farming questions</li>
+<li>Instant AI responses</li>
+<li>Disease guidance</li>
+<li>24/7 assistance</li>
+</ul>
+
+</div>
+
+<div class="feature-card">
+<i class="fas fa-leaf"></i>
+<h2>Disease Library</h2>
+
+<ul>
+<li>Symptoms</li>
+<li>Causes</li>
+<li>Treatment</li>
+<li>Prevention methods</li>
+</ul>
+
+</div>
+
+</div>
+
+<div class="bottom">
+
+<div class="tech">
+
+<h2>🛠 Technologies Used</h2>
+
+<div class="tech-icons">
+
+<div><i class="fab fa-python"></i><span>Python</span></div>
+
+<div><i class="fas fa-fire"></i><span>Flask</span></div>
+
+<div><i class="fas fa-brain"></i><span>TensorFlow</span></div>
+
+<div><i class="fas fa-mobile"></i><span>MobileNetV2</span></div>
+
+<div><i class="fab fa-html5"></i><span>HTML</span></div>
+
+<div><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+
+<div><i class="fab fa-js"></i><span>JS</span></div>
+
+</div>
+
+</div>
+
+<div class="arch">
+
+<h2>🏗 System Architecture</h2>
+
+<div class="arch-flow">
+
+<div>
+<i class="fas fa-user"></i>
+<p>Farmer</p>
+</div>
+
+➡
+
+<div>
+<i class="fas fa-desktop"></i>
+<p>Dashboard</p>
+</div>
+
+➡
+
+<div>
+<i class="fas fa-server"></i>
+<p>Backend</p>
+</div>
+
+➡
+
+<div>
+<i class="fas fa-brain"></i>
+<p>AI Model</p>
+</div>
+
+➡
+
+<div>
+<i class="fas fa-clipboard-check"></i>
+<p>Result</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="quote">
+🌱 KrishiNetra combines Artificial Intelligence,
+Deep Learning, Weather Intelligence and Conversational AI
+to support smarter farming and improve crop productivity.
+</div>
+
+</div>
+
+<script>
+// Hamburger menu toggle
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navLinks = document.getElementById("navLinks");
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle("open");
+    });
+    document.addEventListener("click", function() {
+        navLinks.classList.remove("open");
+    });
+    navLinks.addEventListener("click", function(e) {
+        e.stopPropagation();
+    });
+}
+</script>
+
+</body>
+</html>

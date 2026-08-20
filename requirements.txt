@@ -1,0 +1,9 @@
+Flask
+tensorflow
+numpy
+python-dotenv
+openai
+mysql-connector-python
+Flask-Mail
+requests
+gunicorn

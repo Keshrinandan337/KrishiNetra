@@ -1,0 +1,343 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f7f6;
+    margin: 0;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    height: 87px;
+    align-items: center;
+    padding: 0 45px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 65px;
+    height:56px;
+}
+
+.brand h2 {
+    margin: 0;
+    color: #2e7d32;
+    font-size: 22px;
+}
+
+.brand p {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+    font-weight: bold;
+}
+
+/* NAV BUTTONS */
+.nav-right {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-outline {
+    padding: 8px 16px;
+    border: 2px solid #2e7d32;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: #e8f5e9;
+}
+
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 85%;
+    max-width: 1100px;
+    margin: 25px auto;
+}
+
+/* ================= SUCCESS ================= */
+.success {
+    background: #e6f4ea;
+    border-radius: 14px;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+}
+
+.success-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.success-icon {
+    background: #4caf50;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.success-text h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #1b5e20;
+}
+
+.success-text p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+/* ================= TOP ================= */
+.top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* ================= CARD ================= */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ================= IMAGE ================= */
+.card img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ================= RESULT CARD ================= */
+.result-card h2 {
+    margin: 10px 0;
+    font-size: 28px;
+}
+
+.label {
+    color: #777;
+    font-weight: bold;
+}
+
+/* 🔥 NEW PREDICTION BOX */
+.prediction-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    background: #fdecea;
+    padding: 15px;
+    border-radius: 14px;
+    margin-top: 10px;
+    margin-bottom: 27px;
+}
+
+/* Icon circle */
+.prediction-box .icon {
+    font-size: 22px;
+    background: #e53935;
+    color: white;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* Sub label */
+.sub-label {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+/* Disease name */
+.disease-name {
+    margin: 2px 0;
+    font-size: 26px;
+}
+
+/* Confidence badge */
+.confidence-badge {
+    display: inline-block;
+    background: #d4edda;
+    color: #2e7d32;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ================= STATUS COLORS ================= */
+.diseased {
+    color: #e53935;
+    font-weight: bold;
+}
+
+.healthy {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+/* Status row */
+/* STATUS BADGE */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* 🔴 Red (Severe) */
+.status-red {
+    background: #f8d7da;
+    color: #c62828;
+}
+
+/* 🟢 Green (Healthy) */
+.status-green {
+    background: #d4edda;
+    color: #2e7d32;
+}
+
+/* 🟡 Yellow (Moderate) */
+.status-yellow {
+    background: #fff3cd;
+    color: #ff9800;
+}
+
+/* 🔴 DOT */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;  /* 🔥 auto match text color */
+}
+
+/* ================= PROGRESS ================= */
+.confidence-label {
+    margin-top: 0;
+    font-weight: 600;
+    color: #444;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress {
+    background: #eee;
+    height: 16px;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    width: 85%;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #2e7d32, #66bb6a);
+    height: 100%;
+    border-radius: 10px;
+    animation: loadBar 1.2s ease-in-out;
+}
+
+.progress-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+@keyframes loadBar {
+    from { width: 0; }
+}
+
+/* ================= BADGE ================= */
+.badge-red {
+    background: #ffcdd2;
+    color: #c62828;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.badge-green {
+    background: #c8e6c9;
+    color: #2e7d32;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+/* ================= GRID ================= */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 20px;
+    
+}
+
+/* ================= COLOR CARDS ================= */
+.red {
+    border-left: 6px solid #e53935;
+}
+
+.green {
+    border-left: 6px solid #2e7d32;
+}
+
+/* ================= TEXT ================= */
+h2, h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 6px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.7;
+}

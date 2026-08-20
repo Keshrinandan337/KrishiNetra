@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Me</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Navbar -->
+
+    <div class="navbar">
+
+        <div class="logo">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo-img">
+
+            <div class="logo-text">
+                <h2>KrishiNetra</h2>
+                <p>AI-Powered Agriculture Assistant / Advisor</p>
+            </div>
+        </div>
+
+        <div class="menu">
+            <a href="/home" class="back-btn">
+                <i class="fas fa-arrow-left"></i>  🏠 Home
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <div class="hero-text">
+            <h1>Let's Connect 👋</h1>
+
+            <p>
+                Interested in collaborating, discussing projects,
+                internship opportunities or exciting ideas?
+                I'd love to hear from you!
+            </p>
+
+            <a href="#" class="btn">
+                Open to Work & Internship Opportunities
+            </a>
+        </div>
+
+        <div>
+            <img src="https://cdn-icons-png.flaticon.com/512/646/646094.png">
+        </div>
+
+    </div>
+
+    <!-- TOP SECTION -->
+
+    <div class="grid">
+
+        <!-- LEFT SIDE -->
+
+        <div>
+
+            <div class="about-card">
+
+                <h2 class="about-heading">👨‍💻 About Me</h2>
+
+                <div class="about-content">
+
+                    <div class="profile-image">
+                        <img src="{{ url_for('static', filename='images/profile.jpg') }}">
+                    </div>
+
+                    <div class="profile-details">
+
+                        <h1>Keshri Nandan</h1>
+                        <h3>Computer Science Student</h3>
+
+                        <ul class="points">
+                            <li>⭐ AI & Machine Learning Enthusiast</li>
+                            <li>⭐ Full Stack Developer</li>
+                            <li>⭐ Problem Solver</li>
+                            <li>⭐ Building impactful real-world solutions</li>
+                        </ul>
+
+                        <div class="extra-info">
+                            <div class="info-box">📍 India</div>
+                            <div class="info-box">🎓 B.Tech CSE</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- CONNECT SECTION -->
+
+                <div class="connect-box">
+
+                    <h2>🔗 Connect With Me</h2>
+
+                    <div class="socials">
+
+                        <a href="https://www.linkedin.com/in/keshrinandan337" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+
+                        <a href="https://github.com/Keshrinandan337" target="_blank">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+
+                        <a href="https://leetcode.com/u/Keshrinandan337/" target="_blank">
+                            <i class="fas fa-code"></i>
+                            LeetCode
+                        </a>
+
+                        <a href="https://my-portfolio-eight-xi-14.vercel.app/" target="_blank">
+                            <i class="fas fa-file-alt"></i>
+                            Portfolio/Resume
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- WHY CONNECT -->
+
+            <div class="card why-card">
+
+                <h3>✨ Why Connect?</h3>
+
+                <ul class="contact-list">
+                    <li>✅ Excited to work on innovative projects</li>
+                    <li>✅ Always open to new opportunities</li>
+                    <li>✅ Love to collaborate and learn together</li>
+                    <li>✅ Passionate about technology & innovation</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div>
+
+            <div class="card">
+
+                <h3>📩 Send Me a Message</h3>
+
+                <br>
+
+                <div id="successMessage" class="success-message" style="display:none;"></div>
+
+                <form action="/contact" method="POST">
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        required>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email"
+                        required>
+
+                    <input
+                        type="text"
+                        name="subject"
+                        placeholder="Subject"
+                        required>
+
+                    <textarea
+                        name="message"
+                        placeholder="Your Message"
+                        required></textarea>
+
+                    <button id="sendBtn" type="submit">
+                        🚀 Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- QUICK CONTACT -->
+
+            <div class="card quick-card">
+
+                <h3>📞 Quick Contact</h3>
+
+                <ul class="contact-list">
+
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        keshrinandan337@gmail.com
+                    </li>
+
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        +91 9541715361
+                    </li>
+
+                    <li>
+                        <i class="fab fa-linkedin"></i>
+                        https://www.linkedin.com/in/keshrinandan337
+                    </li>
+
+                    <li>
+                        <i class="fab fa-github"></i>
+                        https://github.com/Keshrinandan337
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        💚 Thanks for visiting! Let's build something amazing together.
+    </div>
+
+</div>
+
+<script>
+const form = document.querySelector('form[action="/contact"]');
+const btn = document.getElementById("sendBtn");
+const success = document.getElementById("successMessage");
+
+form.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    btn.disabled = true;
+    btn.innerHTML = "⏳ Sending...";
+
+    const formData = new FormData(form);
+
+    try{
+
+        const response = await fetch("/contact",{
+            method:"POST",
+            body:formData
+        });
+
+        const data = await response.json();
+
+        if(data.success){
+
+            success.style.display="block";
+            success.innerHTML="✅ " + data.message;
+
+            form.reset();
+
+            btn.innerHTML="✅ Message Sent";
+
+            setTimeout(function(){
+
+                success.style.opacity="0";
+
+                setTimeout(function(){
+
+                    success.style.display="none";
+                    success.style.opacity="1";
+                    success.innerHTML = "";
+
+                    btn.disabled=false;
+                    btn.innerHTML="🚀 Send Message";
+
+                },500);
+
+            },3000);
+
+        }
+        else{
+
+            alert(data.message);
+
+            btn.disabled=false;
+            btn.innerHTML="🚀 Send Message";
+        }
+
+    }
+    catch(err){
+
+        alert("Something went wrong.");
+
+        btn.disabled=false;
+        btn.innerHTML="🚀 Send Message";
+
+    }
+
+});
+</script>
+
+</body>

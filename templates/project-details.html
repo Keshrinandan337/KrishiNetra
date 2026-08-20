@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KrishiNetra - Project Details</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1974&auto=format&fit=crop");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    color:white;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+.navbar{
+    width:100%;
+    padding:16px 60px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo img{
+    width:48px;
+    height:48px;
+    object-fit:cover;
+}
+
+.logo-text h2{
+    font-size:22px;
+    font-weight:700;
+}
+
+.logo-text p{
+    font-size:13px;
+    opacity:0.9;
+}
+
+
+.nav-links{
+display:flex;
+gap:15px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+padding:12px 22px;
+border:1px solid rgba(255,255,255,.4);
+border-radius:30px;
+}
+
+.nav-links a.active{
+background:#4caf50;
+}
+
+.nav-links a:hover{
+    background:rgba(255,255,255,0.18);
+}
+
+/* MAIN */
+
+.container{
+    width:88%;
+    margin:auto;
+    padding:40px 0;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.hero h1{
+    font-size:58px;
+    margin-bottom:18px;
+}
+
+.hero p{
+    font-size:20px;
+    max-width:1000px;
+    margin:auto;
+    line-height:1.9;
+    color:rgba(255,255,255,0.92);
+}
+
+/* GLASS */
+
+.glass{
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(16px);
+
+    border-radius:28px;
+
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+
+    margin-top:30px;
+}
+
+/* CARD */
+
+.card{
+    padding:32px;
+}
+
+.card h2{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.card p{
+    line-height:1.9;
+    font-size:17px;
+    color:rgba(255,255,255,0.92);
+}
+
+.card ul{
+    margin-top:15px;
+}
+
+.card ul li{
+    margin-bottom:14px;
+    line-height:1.7;
+    font-size:17px;
+}
+
+/* WORKFLOW */
+
+.workflow{
+    margin-top:40px;
+    padding:35px;
+}
+
+.workflow h2{
+    text-align:center;
+    font-size:36px;
+    margin-bottom:35px;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.step{
+    padding:28px 22px;
+    border-radius:24px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    text-align:center;
+}
+
+.step h3{
+    font-size:22px;
+    margin:15px 0;
+}
+
+.step p{
+    font-size:15px;
+    line-height:1.7;
+}
+
+/* SECTION TITLE */
+
+.section-title{
+    text-align:center;
+    font-size:38px;
+    margin-top:45px;
+    margin-bottom:28px;
+}
+
+/* GRID BOXES */
+
+.tech-grid,
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.tech-box{
+    padding:28px;
+    border-radius:24px;
+
+    background:rgba(255,255,255,0.06);
+
+    border:1px solid rgba(255,255,255,0.12);
+
+    text-align:center;
+}
+
+.tech-box h3{
+    margin-top:14px;
+    margin-bottom:12px;
+    font-size:22px;
+}
+
+.tech-box p{
+    line-height:1.8;
+    font-size:15px;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    margin-top:45px;
+    padding-bottom:25px;
+    font-size:15px;
+    opacity:0.9;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+    .tech-grid,
+    .feature-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:1100px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+        padding:20px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .tech-grid,
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo-img">
+
+        <div class="logo-text">
+            <h2>KrishiNetra</h2>
+            <p>AI-Powered Agriculture Assistant</p>
+        </div>
+
+    </div>
+
+    <div class="nav-links">
+    <a href="/home">🏠 Home</a>
+    <a href="/about"> ← Back </a>
+    </div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <h1>🌱 KrishiNetra</h1>
+
+        <p>
+            KrishiNetra is an AI-powered smart agriculture platform developed
+            to help farmers detect plant diseases accurately using Deep Learning,
+            Computer Vision, weather-based assistance, and intelligent chatbot support.
+            The platform combines modern Artificial Intelligence technologies with
+            agriculture to provide faster disease prediction, smart farming guidance,
+            and an improved digital farming experience.
+        </p>
+
+    </div>
+
+    <!-- INTRO + OBJECTIVE -->
+
+    <div class="grid">
+
+        <div class="card glass">
+
+            <h2>📖 Introduction</h2>
+
+            <p>
+                KrishiNetra is a modern AI-driven agriculture assistant designed
+                to improve crop health monitoring and smart farming practices.
+                The system allows users to upload crop leaf images and instantly
+                receive disease predictions using a trained MobileNetV2 Deep Learning model.
+            </p>
+
+            <br>
+
+            <p>
+                Along with disease detection, the platform also provides
+                weather-based farming guidance and an AI-powered chatbot
+                that helps farmers with agricultural queries, disease awareness,
+                and crop management support.
+            </p>
+
+            <br>
+ 
+            <p>
+                The platform is designed with a modern and responsive web interface that makes the system easy to use for farmers and agricultural users.
+            </p>
+
+        </div>
+
+        <div class="card glass">
+
+            <h2>🎯 Project Objective</h2>
+
+            <p>
+                The main objective of KrishiNetra is to bridge the gap between
+                Artificial Intelligence and agriculture by providing farmers with
+                an intelligent, accessible, and user-friendly digital farming solution.
+            </p>
+
+            <ul>
+                <li>🌿 Reduce crop damage and disease spread</li>
+                <li>🤖 Promote AI-driven smart farming solutions</li>
+                <li>📷 Enable fast and accurate disease prediction</li>
+                <li>🌦 Provide weather-aware farming assistance</li>
+                <li>💬 Offer AI chatbot support for farmers</li>
+                <li>📚 Improve disease awareness and crop management</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- WORKFLOW -->
+
+    <div class="workflow glass">
+
+        <h2>⚙️ How KrishiNetra Works</h2>
+
+        <div class="steps">
+
+            <div class="step">
+                <h3>📤 Upload Image</h3>
+                <p>
+                    User uploads crop leaf image through the web application interface.
+                </p>
+            </div>
+
+            <div class="step">
+                <h3>🧠 AI Processing</h3>
+                <p>
+                    Image is preprocessed and analyzed using MobileNetV2 CNN model.
+                </p>
+            </div>
+
+            <div class="step">
+                <h3>🔍 Disease Detection</h3>
+                <p>
+                    AI predicts the disease category with optimized accuracy.
+                </p>
+            </div>
+
+            <div class="step">
+                <h3>📋 Smart Assistance</h3>
+                <p>
+                    System displays prediction results, chatbot assistance,
+                    and weather-based farming guidance.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TECHNOLOGIES -->
+
+    <h2 class="section-title">
+        🚀 Technologies Used
+    </h2>
+
+    <div class="tech-grid">
+
+        <div class="tech-box glass">
+
+            <h3>🌶 Flask</h3>
+
+            <p>
+                Lightweight Python backend framework used for
+                routing, server-side processing, and AI model integration.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>🕸 MobileNetV2</h3>
+
+            <p>
+                Deep Learning CNN architecture optimized for
+                accurate plant disease detection and classification.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>🤖 TensorFlow / Keras</h3>
+
+            <p>
+                Used for training and deploying the AI model
+                using transfer learning techniques.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>💻 HTML • CSS • JavaScript</h3>
+
+            <p>
+                Used to build responsive frontend interfaces
+                with modern glassmorphism UI design.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>📸 OpenCV</h3>
+
+            <p>
+                Used for image preprocessing, resizing,
+                normalization, and input handling.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>📊 NumPy & Pandas</h3>
+
+            <p>
+                Used for dataset processing, numerical operations,
+                and machine learning data handling.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- FEATURES -->
+
+    <h2 class="section-title">
+        🌟 Smart Features & Modules
+    </h2>
+
+    <div class="feature-grid">
+
+        <div class="tech-box glass">
+
+            <h3>🤖 AI Disease Detection</h3>
+
+            <p>
+                Detects plant diseases using Deep Learning
+                and image classification techniques.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>🌦 Weather Advisory</h3>
+
+            <p>
+                Provides weather-based farming guidance
+                and environmental assistance for smart agriculture.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>💬 AI Agriculture Chatbot</h3>
+
+            <p>
+                Intelligent chatbot developed to answer
+                agriculture-related queries and assist farmers.
+            </p>
+
+        </div>
+
+        <div class="tech-box glass">
+
+            <h3>📚 Disease Information Library</h3>
+
+            <p>
+                Provides disease details, prevention methods,
+                and crop management awareness.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+        🌱 KrishiNetra — AI Powered Smart Agriculture Assistant
+    </div>
+
+</div>
+
+</body>
+</html>

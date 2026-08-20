@@ -1,0 +1,360 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1974&auto=format&fit=crop') no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 🔥 Blur Overlay */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+/* Ensure content is above blur */
+.welcome, .cards {
+    position: relative;
+    z-index: 1;
+}
+
+/* Push the navbar and its dropdown menus over the cards */
+/* 🔝 Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+    align-items: center;
+    padding: 25px 40px;
+    background: rgba(255, 255, 255, 0.08);
+    color: black;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 🔥 Logo Layout */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    width: 60px;
+    height: 46px;
+}
+
+.logo-text h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #ecefec;
+}
+
+.logo-text p {
+    margin: 0;
+    font-size: 13px;
+    color: rgb(243, 241, 241);
+}
+
+
+/* ================= PROFILE ================= */
+
+.profile{
+    position:relative;
+    margin-left:18px;
+}
+
+.profile-btn{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    height:58px;
+
+    padding:8px 18px;
+
+    background:rgba(18,28,40,.95);
+
+    border:1px solid rgba(62,230,124,.35);
+
+    border-radius:50px;
+
+    color:white;
+    min-width:190px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.profile-btn:hover{
+
+    background:#18222d;
+
+}
+
+.profile-btn span{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+.avatar{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#39d46b;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:20px;
+    font-weight:700;
+
+    color:white;
+}
+
+.arrow{
+    font-size:12px;
+    color:#bbb;
+}
+
+.profile-menu{
+
+    position:absolute;
+    right:0;
+    top:62px;
+
+    width:220px;
+
+    background:#141d28;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    z-index:99999;
+
+    display:none;
+}
+
+.profile-menu.show{
+
+    display:block;
+
+}
+
+.profile-menu h3{
+
+    margin-bottom:10px;
+
+    font-size:20px;
+    margin:0 0 8px;
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.profile-menu p{
+
+    margin:8px 0;
+
+    color:#cfd8dc;
+
+    font-size:14px;
+
+}
+
+.profile-divider{
+
+    border:none;
+    border-top:1px solid rgba(255,255,255,.08);
+
+    margin:14px 0 12px;
+
+}
+
+
+.logout-link{
+
+    margin-top:12px;
+
+    text-align:center;
+
+}
+
+.logout-link a{
+
+    display:inline-block;
+
+    color:#ff6b6b;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    padding:6px 12px;
+
+}
+
+.logout-link a:hover{
+
+    color:#ffffff;
+
+    text-decoration:underline;
+
+}
+
+
+/* Nav container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+/* 🔥 NAV BUTTON FIXED FOR WHITE NAVBAR */
+.nav-btn{
+    text-decoration: none;
+    color: white;
+    padding: 12px 22px;
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+/* Hover */
+.nav-btn:hover{
+    background: #4caf50;
+    border-color: #4caf50;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Active */
+.nav-btn.active {
+    color: white;
+    font-weight: 600;
+}
+
+/* 🟩 Cards container */
+.cards {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 30px 0;
+}
+
+/* 🧊 Card */
+.card {
+    width: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f8f8f8;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    height: 400px;   
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* 🔝 Header */
+.card-header {
+    background: #e8f5e9;
+    padding: 12px;
+    font-weight: bold;
+    color: #2e7d32;
+    text-align: left;
+}
+
+/* 📦 Body */
+.card-body {
+    padding: 0;
+    text-align: center;
+}
+
+/* Text */
+.card-body p {
+    padding: 15px;
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 🖼 IMAGE */
+.card-img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    display: block;
+}
+
+/* 🔽 Footer */
+.card-footer {
+    padding: 15px;
+    background: white;
+    text-align: center;
+}
+
+/* Buttons */
+.card-footer button {
+    width: 85%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background: #1b5e20;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card-footer button:hover {
+    background: #2e7d32;
+}
+
+/* Upload card adjustments */
+.card-upload {
+    height: 400px;
+}
+
+.card-upload .card-img {
+    height: 180px;
+}
+
+.card-upload .card-footer button {
+    padding: 8px;
+    font-size: 13px;
+    margin-top: 6px;
+}

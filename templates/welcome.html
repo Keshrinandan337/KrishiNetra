@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiNetra - Welcome</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_1.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Left Section -->
+    <div class="left-panel">
+
+    <div class="logo">
+
+        <div class="logo-title">
+            <i class="fa-solid fa-seedling"></i>
+            <h1>KrishiNetra</h1>
+        </div>
+
+        <p>AI-Powered Agriculture Assistant</p>
+
+    </div>
+
+        <div class="content">
+
+            <h2>
+                Welcome to <br>
+                KrishiNetra
+            </h2>
+
+            <p>
+                Your AI-powered partner for smarter farming and better yields.
+            </p>
+
+            <div class="feature">
+                <i class="fa-solid fa-leaf"></i>
+                <span>Crop Advisory</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-shield-heart"></i>
+                <span>Disease Detection</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <span>Weather Updates</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-robot"></i>
+                <span>Chatbot Assistance</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Right Section -->
+    <div class="right-panel">
+
+        <div class="card">
+
+            <div class="icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <h2>Enter Your Details</h2>
+
+            <p>
+                Please provide basic information to continue
+            </p>
+
+            <form action="/setname" method="POST">
+
+                <!-- Name -->
+                <div class="input-group">
+                    <label>
+                        Name / नाम
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter your name"
+                        required>
+                </div>
+
+                <!-- State -->
+                <div class="input-group">
+                    <label>
+                        State / राज्य
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="state"
+                        placeholder="Enter your state"
+                        required>
+                </div>
+
+                <!-- District -->
+                <div class="input-group">
+                    <label>
+                        District / जिला
+                    </label>
+
+                    <input
+                        type="text"
+                        name="district"
+                        placeholder="Enter your district (optional)">
+                </div>
+
+                <!-- Continue Button -->
+                <button type="submit" class="btn">
+                    Continue
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

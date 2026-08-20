@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About KrishiNetra</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1974&auto=format&fit=crop");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+    width:100%;
+    padding:16px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+
+    border-bottom:1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 4px 30px rgba(255,255,255,0.05),
+    0 0 20px rgba(255,255,255,0.06);
+}
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo-img{
+    width:60px;
+    height:46px;
+}
+
+.logo-text h2{
+    font-size:22px;
+    font-weight:700;
+    color:white;
+    line-height:1;
+}
+
+.logo-text p{
+    font-size:13px;
+    color:rgba(255,255,255,0.9);
+    margin-top:4px;
+}
+
+/* Back Button */
+.back-btn{
+    padding:10px 24px;
+
+    border-radius:40px;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.18);
+
+    text-decoration:none;
+    color:white;
+
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    background:rgba(255,255,255,0.18);
+}
+
+/* CONTAINER */
+
+.container{
+    width:86%;
+    margin:auto;
+}
+
+/* MAIN TITLE */
+
+.main-title{
+    font-size:34px;
+    font-weight:700;
+    margin-top:20px;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+
+.know-btn{
+    position:absolute;
+    right:70px;
+    top:81%;
+    transform:translateY(-50%);
+
+    display:inline-block;
+    padding:12px 28px;
+    border-radius:40px;
+    text-decoration:none;
+    color:white;
+    font-size:16px;
+    font-weight:500;
+
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+
+    backdrop-filter:blur(2px);
+
+    transition:0.3s;
+}
+
+.know-btn:hover{
+    background:rgba(255,255,255,0.18);
+    transform:translateY(-26px);
+}
+
+/* GLASS EFFECT */
+
+.glass{
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.16);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-radius:24px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* ABOUT CARD */
+
+.about-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    padding:28px 32px;
+}
+
+.robot{
+    width:190px;
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0px);}
+}
+
+.aboutt-text{
+    flex:1;
+}
+
+.about-text h2{
+    font-size:24px;
+    line-height:1.7;
+    margin-bottom:18px;
+    font-weight:400;
+}
+
+.about-text h2 b{
+    font-weight:700;
+}
+
+.features{
+    margin-top:12px;
+}
+
+.features li{
+    list-style:none;
+    font-size:18px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* SECTION TITLE */
+
+.section-title{
+    margin:28px 0 18px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.section-title h3{
+    font-size:22px;
+    white-space:nowrap;
+    font-weight:600;
+}
+
+.line{
+    width:100%;
+    height:1px;
+    background:rgba(255,255,255,0.25);
+}
+
+
+.work-status{
+    position:absolute;
+    left:35px;
+    bottom:42px;
+
+    font-size:13px;
+    color:rgba(255,255,255,0.75);
+
+    margin:0;
+}
+
+
+
+/* BOTTOM SECTION */
+
+.bottom{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:30px;
+}
+
+/* TECH CARD */
+
+.tech-card{
+    padding:22px;
+}
+
+.tech-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.tech-box{
+    padding:22px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(8px);
+}
+
+.tech-box h4{
+    font-size:28px;
+    margin-bottom:14px;
+    font-weight:600;
+}
+
+.tech-box p{
+    font-size:16px;
+    line-height:1.6;
+}
+
+.tech-box small{
+    display:block;
+    margin-top:8px;
+    font-size:14px;
+}
+
+/* PROFILE CARD */
+
+.profile-card{
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position: relative;
+}
+
+.profile-top{
+    display:flex;
+    gap:40px;
+    align-items:flex-start;
+}
+
+.profile-img{
+    width:135px;
+    height:160px;
+    margin-top: 7px;
+    border-radius:18px;
+
+    object-fit:cover;
+    object-position:center top;
+
+    transform:scale(1.15);
+
+    transition:0.3s;
+}
+
+.profile-text h5{
+    font-size:14px;
+    font-weight:400;
+    margin-bottom:4px;
+}
+
+.profile-text h2{
+    font-size:32px;
+    margin-bottom:4px;
+    font-weight:700;
+}
+
+.profile-text p{
+    font-size:18px;
+    margin-bottom:16px;
+}
+
+.icons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.icon{
+    position:relative;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.12);
+
+    color:white;
+    text-decoration:none;
+
+    font-size:18px;
+
+    transition:0.3s;
+}
+
+.icon:hover{
+    transform:translateY(-3px);
+    background:rgba(255,255,255,0.18);
+}
+
+/* Tooltip */
+
+.icon::after{
+    content:attr(data-name);
+
+    position:absolute;
+
+    bottom:-32px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:rgba(0,0,0,0.85);
+
+    color:white;
+
+    padding:4px 10px;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+    white-space:nowrap;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.3s;
+}
+
+.icon:hover::after{
+    opacity:1;
+    visibility:visible;
+}
+
+.touch{
+    font-size:22px;
+    transform:translateY(20px);
+}
+
+.btn{
+    margin-top:18px;
+    align-self:flex-end;
+    padding:10px 26px;
+    border-radius:40px;
+    border:1px solid rgba(255,255,255,0.18);
+    background:rgba(255,255,255,0.07);
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:rgba(255,255,255,0.16);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .about-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .features li{
+        justify-content:center;
+    }
+
+    .bottom{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+        padding:20px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .main-title{
+        font-size:28px;
+    }
+
+    .about-text h2{
+        font-size:18px;
+    }
+
+    .tech-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo-img">
+
+
+
+        <div class="logo-text">
+            <h2>KrishiNetra</h2>
+            <p>AI-Powered Agriculture Assistant / Advisor</p>
+        </div>
+
+    </div>
+
+    <a href="/home" class="back-btn">
+        ← Back
+    </a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <div class="main-title">
+        🌱 About KrishiNetra 🌱
+    </div>
+
+    <!-- ABOUT CARD -->
+
+    <div class="about-card glass">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" class="robot">
+
+        <div class="about-text">
+
+            <h2>
+                <b>KrishiNetra</b> is an AI-powered agriculture assistant
+                designed to assist farmers by providing accurate and timely
+                information for crop management.
+            </h2>
+
+            <ul class="features">
+                <li>🌿 AI-powered plant disease detection</li>
+                <li>🍃 Smart farming and Weather-based assistant</li>
+                <li>⚡ Integrated diseases information library</li>
+                <li>🤖 AI chatbot for smart agricultural assistance</li>
+            </ul>
+
+               <a href="/project-details" class="know-btn">
+                    Know More →
+               </a>
+
+        </div>
+
+    </div>
+
+    <!-- TITLE -->
+
+    <div class="section-title">
+        <div class="line"></div>
+        <h3>Technologies Used</h3>
+        <div class="line"></div>
+    </div>
+
+    <!-- BOTTOM -->
+
+    <div class="bottom">
+
+        <!-- TECH CARD -->
+
+        <div class="tech-card glass">
+
+            <div class="tech-grid">
+
+                <div class="tech-box">
+
+                    <h4>🌶 Flask</h4>
+
+                    <p>
+                         A Lightweight Python web framework used to build the backend architecture of KrishiNetra.
+                    </p>
+
+                    <small>
+                        Handles image uploads, AI model integration,prediction processing, and dynamic routing.
+                    </small>
+                  
+
+                </div>
+
+                <div class="tech-box">
+
+                    <h4>🕸 MobileNetV2</h4>
+
+                    <p>
+                        Deep Learning CNN architecture optimized for fast and accurate plant disease detection.
+                    </p>
+
+                    <small>
+                        Trained on agricultural image datasets for real-time prediction and classification.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PROFILE -->
+
+        <div class="profile-card glass">
+
+            <div class="profile-top">
+
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" class="profile-img">
+
+                <div class="profile-text">
+
+                    <h5>Developed By</h5>
+
+                    <h2>Keshri Nandan</h2>
+
+                    <p>Computer Science Student</p>
+
+
+                    <link rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+                    <div class="icons">
+
+                        <a href="https://www.linkedin.com/in/keshrinandan337"
+                           target="_blank"
+                           class="icon"
+                           data-name="LinkedIn">
+                           <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                        <a href="https://github.com/Keshrinandan337"
+                           target="_blank"
+                           class="icon"
+                           data-name="GitHub">
+                           <i class="fab fa-github"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME"
+                           target="_blank"
+                           class="icon"
+                           data-name="Instagram">
+                           <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a href="https://leetcode.com/u/Keshrinandan337/"
+                           target="_blank"
+                           class="icon"
+                           data-name="Leetcode">
+                           <i class="fas fa-code"></i>
+                        </a>
+
+                        <a href="https://my-portfolio-eight-xi-14.vercel.app/"
+                           target="_blank"
+                           class="icon"
+                           data-name="Portfolio">
+                           <i class="fas fa-laptop-code"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="touch">
+                ⟳ Get in touch!
+            </div>
+
+            <p class="work-status">
+                🚀 Open for Work & Internship Opportunities
+            </p>
+
+            <a href="{{ url_for('contact') }}" class="btn">
+                View All →
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+🌱 KrishiNetra – AI Powered Agriculture Assistant  
+</footer>
+
+</body>
+</html>

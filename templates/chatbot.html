@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KrishiNetra Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+            url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+            margin: 0;
+            height: 100vh;
+
+            /* ✅ Center container vertically */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .back-btn{
+            position:fixed;
+            top:20px;
+            right:35px;
+
+            padding:12px 22px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(10px);
+
+            border:1px solid rgba(255,255,255,0.2);
+            border-radius:12px;
+
+            color:white;
+            text-decoration:none;
+            font-size:16px;
+            font-weight:600;
+ 
+            z-index:1000;
+            transition:0.3s;
+        }
+
+        .back-btn:hover{
+            background:rgba(255,255,255,0.2);
+            transform:translateY(-2px);
+        }
+
+        .chat-container {
+            width: 500px;
+            height: 90vh; /* ✅ reduced height */
+            background: #ffffff;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #075e54;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .header span {
+            font-size: 12px;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            background: #e5ddd5;
+        }
+
+        .message {
+            padding: 10px 14px;
+            margin: 6px 0;
+            border-radius: 15px;
+            max-width: 75%;
+            font-size: 14px;
+        }
+
+        .user {
+            background: #dcf8c6;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background: #ffffff;
+            align-self: flex-start;
+        }
+
+        .typing {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            margin: 0 3px;
+            background-color: gray;
+            border-radius: 50%;
+            animation: blink 1.4s infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        .options {
+            padding: 8px;
+            background: #fafafa;
+            border-top: 1px solid #ddd;
+
+            display: flex;
+            gap: 20px;
+
+            /* ✅ allow wrapping instead of horizontal scroll */
+            flex-wrap: wrap;
+
+            /* ❌ remove horizontal scroll */
+            overflow-x: hidden;
+        }
+
+        .section-btn {
+            background: #e0f2f1;
+            border: none;
+            padding: 6px 10px;
+            font-size: 13px;
+            border-radius: 15px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* ✅ MAIN FIX HERE */
+        #questions {
+            max-height: 180px;   /* limit height */
+            overflow-y: auto;    /* scroll */
+        }
+
+        .question-btn {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            margin: 3px 0;
+            padding: 8px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .input-box {
+            display: flex;
+            padding: 10px;
+            background: #f0f2f5;
+            align-items: center;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .send-btn, .voice-btn, .stop-btn {
+            margin-left: 6px;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .send-btn { background: #25d366; }
+        .voice-btn { background: #34b7f1; }
+        .stop-btn { background: red; }
+
+        #listening {
+            display: none;
+            text-align: center;
+            padding: 5px;
+            color: #075e54;
+            font-weight: bold;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: max-content;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px 8px;
+            border-radius: 6px;
+
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            font-size: 12px;
+            white-space: nowrap;
+
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<a href="/home" class="back-btn">
+    🏠 Home
+</a>
+
+<div class="chat-container">
+
+    <div class="header">
+        🌾 KrishiNetra AI
+        <span>Online • Agriculture Assistant</span>
+    </div>
+
+    <div class="messages" id="messages"></div>
+
+    <div id="listening">🎤 Listening...</div>
+
+    <div class="options">
+        <button class="section-btn" onclick="toggleSection('disease')">🌱 Disease</button>
+        <button class="section-btn" onclick="toggleSection('symptoms')">🔍 Symptoms</button>
+        <button class="section-btn" onclick="toggleSection('treatment')">💊 Treatment</button>
+        <button class="section-btn" onclick="toggleSection('prevention')">🛡 Prevention</button>
+    </div>
+
+    <div class="options" id="questions"></div>
+
+    <div class="input-box">
+        <textarea id="message" placeholder="Type your question..." rows="1"></textarea>
+
+        <div class="tooltip">
+            <button class="voice-btn" onclick="startListening()">🎤</button>
+            <span class="tooltiptext">Voice Input</span>
+        </div>
+
+        <div class="tooltip">
+            <button class="stop-btn" onclick="stopSpeaking()">⛔</button>
+            <span class="tooltiptext">Stop Voice Output</span>
+        </div>
+
+        <div class="tooltip">
+            <button class="send-btn" onclick="sendMessage()">➤</button>
+            <span class="tooltiptext">Send</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+let activeSection = null;
+
+const data = {
+    disease: [
+        "What is late blight?",
+        "What is early blight?",
+        "What is leaf mold?",
+        "What is curl virus?",
+        "What disease affects tomato plants?"
+    ],
+    symptoms: [
+        "What causes leaf spots on plants?",
+        "Why are my plant leaves turning yellow?",
+        "Why are my leaves drying?",
+        "My plant has white spots, what is it?",
+        "My leaves have brown patches, why?",
+        "Leaves are curling, what is the reason?",
+        "There are holes in leaves, why?"
+    ],
+    treatment: [
+        "How to treat late blight?",
+        "How to treat early blight?",
+        "How to treat leaf mold?",
+        "How to treat curl virus?",
+        "How to cure plant diseases naturally?",
+        "Which pesticide should I use?",
+        "How to stop fungal infection in crops?"
+    ],
+    prevention: [
+        "What cause late blight?",
+        "What cause early blight?",
+        "What cause leaf mold?",
+        "What cause curl virus?",
+        "How to prevent plant diseases?",
+        "How to protect crops from pests?",
+        "How to maintain healthy soil?",
+        "What is ideal soil pH for crops?",
+        "How does weather affect crops?"
+    ]
+};
+
+function toggleSection(section) {
+    let qDiv = document.getElementById("questions");
+
+    if (activeSection === section) {
+        qDiv.innerHTML = "";
+        activeSection = null;
+        return;
+    }
+
+    qDiv.innerHTML = "";
+    activeSection = section;
+
+    data[section].forEach(q => {
+        let btn = document.createElement("button");
+        btn.className = "question-btn";
+        btn.innerText = q;
+        btn.onclick = () => sendMessage(q);
+        qDiv.appendChild(btn);
+    });
+}
+
+function startListening() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+    document.getElementById("listening").style.display = "block";
+    recognition.start();
+
+    recognition.onresult = function(e) {
+        document.getElementById("message").value = e.results[0][0].transcript;
+        document.getElementById("listening").style.display = "none";
+        sendMessage();
+    };
+
+    recognition.onend = () => {
+        document.getElementById("listening").style.display = "none";
+    };
+}
+
+function speak(text) {
+    let speech = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(speech);
+}
+
+function stopSpeaking() {
+    window.speechSynthesis.cancel();
+}
+
+function sendMessage(customMsg=null) {
+    let input = document.getElementById("message");
+    let msg = customMsg || input.value;
+
+    if (!msg.trim()) return;
+
+    let messages = document.getElementById("messages");
+
+    document.getElementById("questions").innerHTML = "";
+    activeSection = null;
+
+    let userDiv = document.createElement("div");
+    userDiv.className = "message user";
+    userDiv.innerText = msg;
+    messages.appendChild(userDiv);
+
+    messages.scrollTop = messages.scrollHeight;
+
+    let typing = document.createElement("div");
+    typing.className = "message bot typing";
+    typing.innerHTML = `<div class="dot"></div><div class="dot"></div><div class="dot"></div>`;
+    messages.appendChild(typing);
+
+    fetch("/get_response", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: msg})
+    })
+    .then(res => res.json())
+    .then(data => {
+        setTimeout(() => {
+            messages.removeChild(typing);
+
+            let botDiv = document.createElement("div");
+            botDiv.className = "message bot";
+            botDiv.innerText = data.reply;
+            messages.appendChild(botDiv);
+
+            speak(data.reply);
+
+            messages.scrollTop = messages.scrollHeight;
+        }, 800);
+    });
+
+    input.value = "";
+    // ✅ RESET HEIGHT BACK TO NORMAL
+    input.style.height = "auto";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("message").addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+});
+
+
+const textarea = document.getElementById("message");
+
+textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+});
+
+</script>
+
+</body>
+</html>

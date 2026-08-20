@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Disease Library | KrishiNetra</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/disease_library.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+
+        <div class="logo-text">
+            <h2>KrishiNetra</h2>
+            <p>AI-Powered Agriculture Assistant / Advisor</p>
+        </div>
+    </div>
+
+    <!-- Hamburger (mobile only) -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+
+        <a href="/home" class="nav-btn">
+            🏠 Home
+        </a>
+
+        <a href="/disease-library" class="nav-btn active">
+            📚 Disease Library
+        </a>
+
+        <a href="/about" class="nav-btn">
+            About
+        </a>
+
+        <a href="/working" class="nav-btn">
+            Working
+        </a>
+
+        <a href="/contact" class="nav-btn">
+            Contact me
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1>🍅 Tomato Disease Library</h1>
+        <p>
+            Explore diseases detected by KrishiNetra AI Model
+        </p>
+
+        <div class="badge">
+            <i class="fa-solid fa-circle-check"></i>
+            4 Supported Classes
+        </div>
+    </div>
+
+
+    <!-- CARDS -->
+
+    <div class="disease-grid">
+
+        <!-- Early Blight -->
+        <div class="card">
+
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/download.jpg') }}">
+            </div>
+
+            <h2>Early Blight</h2>
+
+            <span class="tag">Fungal Disease</span>
+
+            <h4>Symptoms</h4>
+
+            <ul>
+                <li>Brown circular spots</li>
+                <li>Yellowing around lesions</li>
+                <li>Leaf drying</li>
+            </ul>
+
+            <h4>Prevention</h4>
+
+            <ul>
+                <li>Crop rotation</li>
+                <li>Remove infected leaves</li>
+            </ul>
+
+        </div>
+
+
+        <!-- Late Blight -->
+
+        <div class="card">
+
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/late blight.jpg') }}">
+            </div>
+
+            <h2>Late Blight</h2>
+
+            <span class="tag">Fungal Disease</span>
+
+            <h4>Symptoms</h4>
+
+            <ul>
+                <li>Dark water-soaked lesions</li>
+                <li>Rapid spread</li>
+                <li>Leaf collapse</li>
+            </ul>
+
+            <h4>Prevention</h4>
+
+            <ul>
+                <li>Fungicide spray</li>
+                <li>Proper drainage</li>
+            </ul>
+
+        </div>
+
+
+        <!-- Leaf Mold -->
+
+        <div class="card">
+
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/leaf_mold_tomato.jpg') }}">
+            </div>
+
+            <h2>Leaf Mold</h2>
+
+            <span class="tag">Fungal Disease</span>
+
+            <h4>Symptoms</h4>
+
+            <ul>
+                <li>Yellow patches</li>
+                <li>Mold under leaves</li>
+                <li>Leaf curling</li>
+            </ul>
+
+            <h4>Prevention</h4>
+
+            <ul>
+                <li>Air circulation</li>
+                <li>Avoid overwatering</li>
+            </ul>
+
+        </div>
+
+
+        <!-- Healthy -->
+
+        <div class="card">
+
+            <div class="img-box">
+                <img src="{{ url_for('static', filename='images/healthy.webp') }}">
+            </div>
+
+            <h2>Healthy Leaf</h2>
+
+            <span class="healthy">Healthy</span>
+
+            <h4>Characteristics</h4>
+
+            <ul>
+                <li>Green color</li>
+                <li>No spots</li>
+                <li>Fresh appearance</li>
+            </ul>
+
+            <h4>Best Practice</h4>
+
+            <ul>
+                <li>Regular monitoring</li>
+                <li>Balanced fertilization</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat-box">
+            <i class="fa-solid fa-leaf"></i>
+            <h2>4</h2>
+            <p>Supported Classes</p>
+        </div>
+
+        <div class="stat-box">
+            <i class="fa-solid fa-brain"></i>
+            <h2>MobileNetV2</h2>
+            <p>Deep Learning Model</p>
+        </div>
+
+        <div class="stat-box">
+            <i class="fa-solid fa-code"></i>
+            <h2>Flask</h2>
+            <p>Backend Framework</p>
+        </div>
+
+        <div class="stat-box">
+            <i class="fa-solid fa-image"></i>
+            <h2>CNN</h2>
+            <p>Image Classification</p>
+        </div>
+
+    </div>
+
+
+    <!-- WORKFLOW -->
+
+    <div class="workflow">
+
+        <h2>⚙ How Disease Detection Works</h2>
+
+        <div class="steps">
+
+            <div class="step">
+                <i class="fa-solid fa-upload"></i>
+                <p>Upload Image</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <i class="fa-solid fa-crop-simple"></i>
+                <p>Preprocessing</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <i class="fa-solid fa-brain"></i>
+                <p>AI Analysis</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <i class="fa-solid fa-chart-line"></i>
+                <p>Prediction</p>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="step">
+                <i class="fa-solid fa-file-lines"></i>
+                <p>Disease Info</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+// Hamburger menu toggle
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navLinks = document.getElementById("navLinks");
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle("open");
+    });
+    document.addEventListener("click", function() {
+        navLinks.classList.remove("open");
+    });
+    navLinks.addEventListener("click", function(e) {
+        e.stopPropagation();
+    });
+}
+</script>
+
+</body>
+</html>
