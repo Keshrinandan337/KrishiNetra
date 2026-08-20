@@ -1,5 +1,5 @@
 Flask
-tensorflow
+tensorflow==2.18.0
 numpy
 python-dotenv
 openai
