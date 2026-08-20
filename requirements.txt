@@ -1,9 +1,10 @@
 Flask
-tensorflow==2.18.0
+tensorflow
 numpy
+Pillow
 python-dotenv
-openai
-mysql-connector-python
-Flask-Mail
 requests
+openai
+Flask-Mail
+psycopg2-binary
 gunicorn

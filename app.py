@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing import image
 from datetime import datetime
 import numpy as np
 from openai import OpenAI
-import mysql.connector
+import psycopg2
 from flask_mail import Mail, Message
 
 
@@ -25,11 +25,13 @@ mail = Mail(app)
 
 # Database connection
 
-db = mysql.connector.connect(
+db = psycopg2.connect(
     host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME")
+    dbname=os.getenv("DB_NAME"),
+    sslmode="require"
 )
 
 cursor = db.cursor()
@@ -694,7 +696,7 @@ def history():
             prediction_time
         FROM prediction_history
         WHERE username=%s
-        AND prediction_time >= NOW() - INTERVAL 7 DAY
+        AND prediction_time >= NOW() - INTERVAL '7 days'
         ORDER BY prediction_time DESC
         """
 
@@ -711,7 +713,7 @@ def history():
             prediction_time
         FROM prediction_history
         WHERE username=%s
-        AND prediction_time >= NOW() - INTERVAL 30 DAY
+        AND prediction_time >= NOW() - INTERVAL '30 days'
         ORDER BY prediction_time DESC
         """
 
@@ -846,6 +848,37 @@ def logout():
     session.clear()
 
     return redirect("/")
+
+def create_tables():
+    conn = psycopg2.connect(
+        host=os.getenv("DB_HOST"),
+        port=os.getenv("DB_PORT"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        dbname=os.getenv("DB_NAME"),
+        sslmode="require"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS prediction_history (
+            id SERIAL PRIMARY KEY,
+            username VARCHAR(255),
+            image_path VARCHAR(500),
+            disease_name VARCHAR(255),
+            confidence FLOAT,
+            state VARCHAR(255),
+            prediction_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+create_tables()
 
 # Run app
 if __name__ == '__main__':
