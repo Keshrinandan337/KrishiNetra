@@ -1,5 +1,9 @@
-from flask import Flask, render_template, request, send_from_directory, redirect, session, jsonify, url_for
 import os
+os.environ["TF_NUM_INTRAOP_THREADS"] = "1"
+os.environ["TF_NUM_INTEROP_THREADS"] = "1"
+os.environ["OMP_NUM_THREADS"] = "1"
+
+from flask import Flask, render_template, request, send_from_directory, redirect, session, jsonify, url_for
 from dotenv import load_dotenv
 import tensorflow as tf
 from tensorflow.keras.models import load_model
@@ -41,7 +45,7 @@ cursor = db.cursor()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Load model
-model = load_model("model.h5")
+model = load_model("model.h5", compile=False)
 
 # Upload folder
 UPLOAD_FOLDER = 'uploads'
