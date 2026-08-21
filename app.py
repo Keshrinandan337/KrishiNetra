@@ -319,85 +319,115 @@ def home():
 # 🔥 Predict route
 @app.route('/predict', methods=['POST'])
 def predict():
-    file = request.files.get('image')
-    username = session.get('username', 'Farmer')
 
-    if file and file.filename != '':
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(filepath)
+    try:
+        print("PREDICT ROUTE CALLED", flush=True)
 
-        img = image.load_img(filepath, target_size=(224, 224))
-        img_array = image.img_to_array(img)
-        img_array = img_array / 255.0
-        img_array = np.expand_dims(img_array, axis=0)
+        file = request.files.get('image')
+        username = session.get('username', 'Farmer')
 
-        predictions = model.predict(img_array)[0]
+        if file and file.filename != '':
 
-        best_idx = np.argmax(predictions)
-        best_class = classes[best_idx]
-        best_conf = float(round(predictions[best_idx] * 100, 2))
-        session['last_disease'] = best_class
+            print("Saving image...", flush=True)
 
-        print("Username:", session.get("username"))
-        print("State:", session.get("state"))
+            filepath = os.path.join(
+                app.config['UPLOAD_FOLDER'],
+                file.filename
+            )
 
-        # Get user details
-        username = session.get("username", "Farmer")
-        state = session.get("state", "Unknown")
+            file.save(filepath)
 
-        # Save prediction into MySQL
-        sql = """
-        INSERT INTO prediction_history
-        (username, state, image_path, disease_name, confidence)
-        VALUES (%s, %s, %s, %s, %s)
-        """
+            print("Loading image...", flush=True)
 
-        values = (
-            username,
-            state,
-            file.filename,
-            best_class,
-            best_conf
-        )       
+            img = image.load_img(
+                filepath,
+                target_size=(224, 224)
+            )
 
-        cursor.execute(sql, values)
-        db.commit()
+            img_array = image.img_to_array(img)
+            img_array = img_array / 255.0
+            img_array = np.expand_dims(img_array, axis=0)
 
+            print("Starting model prediction...", flush=True)
 
-        info_data = disease_info.get(best_class, {})
+            predictions = model.predict(img_array, verbose=0)[0]
 
-        if best_class == "Healthy":
-            severity = "Healthy"
-        elif best_conf >= 85:
-            severity = "Severe"
-        elif best_conf >= 60:
-            severity = "Moderate"
+            print("Prediction completed!", flush=True)
+
+            best_idx = np.argmax(predictions)
+            best_class = classes[best_idx]
+            best_conf = float(round(predictions[best_idx] * 100, 2))
+
+            session['last_disease'] = best_class
+
+            print("Username:", session.get("username"), flush=True)
+            print("State:", session.get("state"), flush=True)
+
+            username = session.get("username", "Farmer")
+            state = session.get("state", "Unknown")
+
+            print("Saving prediction to database...", flush=True)
+
+            sql = """
+                INSERT INTO prediction_history
+                (username, state, image_path, disease_name, confidence)
+                VALUES (%s, %s, %s, %s, %s)
+            """
+
+            values = (
+                username,
+                state,
+                file.filename,
+                best_class,
+                best_conf
+            )
+
+            cursor.execute(sql, values)
+            db.commit()
+
+            print("Database saved successfully!", flush=True)
+
+            info_data = disease_info.get(best_class, {})
+
+            if best_class == "Healthy":
+                severity = "Healthy"
+            elif best_conf >= 85:
+                severity = "Severe"
+            elif best_conf >= 60:
+                severity = "Moderate"
+            else:
+                severity = "Mild"
+
+            image_path = '/uploads/' + file.filename
+
         else:
-            severity = "Mild"
+            image_path = None
+            best_class = "No Image"
+            best_conf = 0
+            severity = "N/A"
 
-        image_path = '/uploads/' + file.filename
+            info_data = {
+                "description": "-",
+                "causes": [],
+                "treatment": [],
+                "prevention": []
+            }
 
-    else:
-        image_path = None
-        best_class = "No Image"
-        best_conf = 0
-        severity = "N/A"
-        info_data = {
-            "description": "-",
-            "causes": [],
-            "treatment": [],
-            "prevention": []
-        }
+        print("Rendering result page...", flush=True)
 
-    return render_template(
-        'result.html',
-        image_path=image_path,
-        disease=best_class,
-        confidence=best_conf,
-        info=info_data,
-        severity=severity,
-        username=username
-    )
+        return render_template(
+            'result.html',
+            image_path=image_path,
+            disease=best_class,
+            confidence=best_conf,
+            info=info_data,
+            severity=severity,
+            username=username
+        )
+
+    except Exception as e:
+        print("❌ PREDICTION ERROR:", str(e), flush=True)
+        return f"Prediction Error: {str(e)}", 500
 
 # 🔥 CHATBOT API ROUTE
 @app.route("/get_response", methods=["POST"])
