@@ -53,6 +53,45 @@ Provides information about tomato plant diseases, including symptoms, treatment,
 The application is designed to work on desktop and mobile devices.
 
 ---
+## 📸 Project Screenshots
+
+### 🏠 Welcome Page
+
+![Welcome Page](Screenshots/welcome.png)
+
+### 🏡 Home Dashboard
+
+![Home Dashboard](Screenshots/home.png)
+
+### 🔍 Disease Prediction
+
+![Disease Prediction](Screenshots/prediction.png)
+
+### 🌿 Disease Library
+
+![Disease Library](Screenshots/disease_library.png)
+
+### 🌦️ Weather Advisory
+
+![Weather Advisory](Screenshots/weather.png)
+
+### 🤖 AI Chatbot
+
+![AI Chatbot](Screenshots/chatbot.png)
+
+### 📊 Prediction History
+
+![Prediction History](Screenshots/history.png)
+
+### ℹ️ How It Works
+
+![How It Works](Screenshots/working.png)
+
+### 👨‍💻 About Project
+
+![About Project](Screenshots/about.png)
+
+---
 
 ## 🧠 AI Model
 
