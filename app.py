@@ -350,7 +350,7 @@ def predict():
 
             print("Starting model prediction...", flush=True)
 
-            predictions = model.predict(img_array, verbose=0)[0]
+            predictions = model(img_array, training=False).numpy()[0]
 
             print("Prediction completed!", flush=True)
 
